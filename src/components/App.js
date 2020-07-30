@@ -1,28 +1,14 @@
-import React, { useState, useEffect } from 'react';
-
-import {
-  getSomething
-} from '../api';
+import React from "react";
+import Header from "./Header/Header";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./UI/Theme";
 
 const App = () => {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    getSomething()
-      .then(response => {
-        setMessage(response.message);
-      })
-      .catch(error => {
-        setMessage(error.message);
-      });
-  });
-
   return (
-    <div className="App">
-      <h1>Hello, World!</h1>
-      <h2>{ message }</h2>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
