@@ -1,6 +1,13 @@
 const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
-const { getAllUsers, createUser } = require("./index");
+const {
+  client,
+  createUser,
+  getUserByUsername,
+  getUsersByID,
+  getAllUsers,
+  getUser,
+} = require("./index");
 
 async function dropTables() {
   try {
@@ -42,7 +49,7 @@ async function createInitialUsers() {
           username: "arman",
           password: hashedPassword,
           email: "test1@yahoo.com",
-          seller: true,
+          admin: true,
         });
         console.log("arman", arman);
         resolve();
@@ -55,7 +62,7 @@ async function createInitialUsers() {
           username: "james",
           password: hashedPassword,
           email: "test2@yahoo.com",
-          seller: true,
+          admin: true,
         });
         console.log(james);
         resolve();
@@ -64,13 +71,13 @@ async function createInitialUsers() {
 
     await new Promise((resolve, reject) => {
       bcrypt.hash("bertie99", SALT_COUNT, async function (err, hashedPassword) {
-        const robin = await createUser({
+        const andreas = await createUser({
           username: "andreas",
           password: hashedPassword,
           email: "test3@yahoo.com",
-          seller: true,
+          admin: true,
         });
-        console.log(robin);
+        console.log(andreas);
         resolve();
       });
     });
@@ -82,7 +89,36 @@ async function createInitialUsers() {
   }
 }
 
-buildTables()
-  .then(populateInitialData)
+async function rebuildDB() {
+  try {
+    client.connect();
+    console.log;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function testDB() {
+  try {
+    await dropTables();
+    await createTables();
+    await createInitialUsers();
+    const userArman = await getUserByUsername("arman");
+    const userJames = await getUserByUsername("james");
+    const userAndreas = await getUserByUsername("andreas");
+    const user2 = await getUsersByID(2);
+    const users = await getAllUsers();
+    console.log("username", userArman, userJames, userAndreas);
+    console.log("User 2", user2);
+    console.log("All users", users);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    client.end();
+  }
+}
+
+rebuildDB()
+  .then(testDB)
   .catch(console.error)
   .finally(() => client.end());

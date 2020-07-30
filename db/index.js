@@ -3,15 +3,14 @@ const bcrypt = require("bcrypt");
 
 const client = new Client("postgres://localhost:5432/triptrak");
 
-// database methods
-async function createUser({ username, password, email, seller }) {
+async function createUser({ username, password, email, admin }) {
   try {
     const result = await client.query(
       `
-      INSERT INTO users(username, password, email, seller)
+      INSERT INTO users(username, password, email, admin)
       VALUES ($1, $2, $3, $4);
     `,
-      [username, password, email, seller]
+      [username, password, email, admin]
     );
 
     return result;
@@ -60,7 +59,7 @@ async function getUsersByID(id) {
 
 async function getAllUsers() {
   const { rows } = await client.query(
-    `SELECT username, seller, shoppingcart
+    `SELECT username, admin, flights
     FROM users;
   `
   );
