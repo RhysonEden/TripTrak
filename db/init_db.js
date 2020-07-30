@@ -109,6 +109,8 @@ async function testDB() {
     const user2 = await getUsersByID(2);
     const users = await getAllUsers();
     console.log("username", userArman, userJames, userAndreas);
+    console.log("User 2", user2);
+    console.log("All users", users);
   } catch (error) {
     console.error(error);
   } finally {
