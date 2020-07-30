@@ -84,7 +84,7 @@ async function getUser({ username, password }) {
     throw error;
   }
 }
-// export
+
 module.exports = {
   client,
   createUser,
