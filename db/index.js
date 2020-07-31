@@ -105,8 +105,8 @@ async function showFlights() {
     const data = await axios.get(
       `http://api.aviationstack.com/v1/flights?access_key=${access_key}`
     );
-    console.log("flight", data);
-    return data;
+    console.log("flight", data.data);
+    return data.data;
   } catch (error) {
     return error;
   }
