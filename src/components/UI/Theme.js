@@ -7,7 +7,7 @@ export default createMuiTheme({
   palette: {
     common: {
       Blue: `${ttBlue}`,
-      Cream: `${ttGrey}`,
+      Grey: `${ttGrey}`,
     },
     primary: {
       main: `${ttBlue}`,
@@ -17,8 +17,11 @@ export default createMuiTheme({
     },
   },
   typography: {
-    h3: {
-      fontWeight: 300,
+    tab: {
+      fontFamily: "Raleway",
+      textTransform: "None",
+      fontWeight: "700",
+      fontSize: "1rem",
     },
   },
 });
