@@ -12,6 +12,9 @@ apiRouter.use("/flights", flightRouter);
 const usersRouter = require("./users");
 apiRouter.use("/users", usersRouter);
 
+const airlineRouter = require("./airlines");
+apiRouter.use("/airlines", airlineRouter);
+
 apiRouter.use((err, req, res, next) => {
   res.status(500).json({
     message: err.message,
