@@ -8,8 +8,8 @@ flightRouter.get("/", async (req, res, next) => {
     console.log("A WORD");
     const flights = await showFlights();
     res.send({ flights });
-  } catch (err) {
-    next(err);
+  } catch ({ name, message }) {
+    next({ name, message });
   }
 });
 
