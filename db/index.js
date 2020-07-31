@@ -1,6 +1,8 @@
 const { Client } = require("pg");
 const bcrypt = require("bcrypt");
-
+require("dotenv").config();
+const axios = require("axios");
+const { access_key } = process.env;
 const client = new Client("postgres://localhost:5432/triptrak");
 //
 async function createUser({ username, password, email, admin }) {
@@ -84,6 +86,19 @@ async function getUser({ username, password }) {
   }
 }
 
+async function showFlights() {
+  console.log(access_key);
+  try {
+    const data = await axios.get(
+      `http://api.aviationstack.com/v1/flights?access_key=${access_key}`
+    );
+    console.log("flight", data);
+    return data.data.cartItems;
+  } catch (error) {
+    return error;
+  }
+}
+
 module.exports = {
   client,
   createUser,
@@ -91,4 +106,5 @@ module.exports = {
   getUsersByID,
   getAllUsers,
   getUser,
+  showFlights,
 };
