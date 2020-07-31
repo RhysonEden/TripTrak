@@ -2,7 +2,7 @@ const { Client } = require("pg");
 const bcrypt = require("bcrypt");
 
 const client = new Client("postgres://localhost:5432/triptrak");
-
+//
 async function createUser({ username, password, email, admin }) {
   try {
     const result = await client.query(
