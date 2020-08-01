@@ -87,19 +87,60 @@ async function getUser({ username, password }) {
   }
 }
 
-// async function showFlights() {
-//   console.log("hitting here");
-//   let response = await fetch("https://dummyapi.io/data/api/user?limit=10", {
-//     method: "GET",
-//     headers: {
-//       "app-id": "0JyYiOQXQQr5H9OEn21312",
-//     },
-//   });
-//   let data = await response.json();
-//   console.log(data);
-//   return data;
-// }
+async function showFlights() {
+  console.log(access_key);
+  try {
+    const data = await axios.get(
+      `http://api.aviationstack.com/v1/flights?access_key=${access_key}`
+    );
+    console.log("flight", data.data);
+    return data.data;
+  } catch (error) {
+    return error;
+  }
+}
 
+async function showAirlines() {
+  console.log(access_key);
+  try {
+    console.log("hitting here");
+    const data = await axios.get(
+      `http://api.aviationstack.com/v1/airlines?access_key=${access_key}`
+    );
+    console.log("airlines", data);
+    return data.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function showPaths() {
+  console.log("testing");
+  console.log(access_key);
+  try {
+    console.log("hitting here");
+    const data = await axios.get(
+      `http://api.aviationstack.com/v1/routes?access_key=${access_key}`
+    );
+    console.log("flight paths", data);
+    return data.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function showFlightsByCity(searchTerm) {
+  console.log("searchTerm", searchTerm);
+  try {
+    const data = await axios.get(
+      `http://api.aviationstack.com/v1/flights?access_key=${access_key}&search=${searchTerm}`
+    );
+    console.log("flight", data.data);
+    return data.data;
+  } catch (error) {
+    return error;
+  }
+}
 module.exports = {
   client,
   createUser,
@@ -107,4 +148,8 @@ module.exports = {
   getUsersByID,
   getAllUsers,
   getUser,
+  showFlights,
+  showAirlines,
+  showPaths,
+  showFlightsByCity,
 };
