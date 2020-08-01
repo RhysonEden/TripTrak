@@ -99,32 +99,6 @@ async function getUser({ username, password }) {
 //   console.log(data);
 //   return data;
 // }
-async function showFlights() {
-  console.log(access_key);
-  try {
-    const data = await axios.get(
-      `http://api.aviationstack.com/v1/flights?access_key=${access_key}`
-    );
-    // console.log("flight", data.data);
-    return data.data;
-  } catch (error) {
-    return error;
-  }
-}
-
-async function showAirlines() {
-  console.log(access_key);
-  try {
-    console.log("hitting here");
-    const data = await axios.get(
-      `http://api.aviationstack.com/v1/airlines?access_key=${access_key}`
-    );
-    console.log("airlines", data);
-    return data.data;
-  } catch (error) {
-    return error;
-  }
-}
 
 module.exports = {
   client,
@@ -133,6 +107,4 @@ module.exports = {
   getUsersByID,
   getAllUsers,
   getUser,
-  showFlights,
-  showAirlines,
 };

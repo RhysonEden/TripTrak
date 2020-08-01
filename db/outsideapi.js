@@ -33,7 +33,22 @@ async function showAirlines() {
   }
 }
 
+async function showPaths() {
+  console.log(access_key);
+  //   try {
+  //     console.log("hitting here");
+  //     const data = await axios.get(
+  //       `http://api.aviationstack.com/v1/routes?access_key=${access_key}`
+  //     );
+  //     console.log("flight paths", data);
+  //     return data.data;
+  //   } catch (error) {
+  //     return error;
+  //   }
+}
+
 module.exports = {
   showFlights,
   showAirlines,
+  showPaths,
 };
