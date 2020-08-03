@@ -5,6 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import { Link as RouterLink, Route, Switch } from "react-router-dom";
+import Login from "../Login/Login";
 
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
@@ -27,10 +29,20 @@ function Header(props) {
         <Toolbar>
           <Typography variant="h3">TripTrak</Typography>
           <Tabs className={classes.tabContainer}>
-            <Tab className={classes.tab} label="Home" />
+            <Tab
+              className={classes.tab}
+              label="Home"
+              component={RouterLink}
+              to="/"
+            />
             <Tab className={classes.tab} label="About Us" />
             <Tab className={classes.tab} label="Contact Us" />
-            <Tab className={classes.tab} label="Register/Login" />
+            <Tab
+              className={classes.tab}
+              label="Register/Login"
+              component={RouterLink}
+              to="login"
+            />
           </Tabs>
         </Toolbar>
       </AppBar>
