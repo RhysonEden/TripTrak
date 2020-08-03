@@ -1,36 +1,25 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
+import Header from "./Header/Header";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./UI/Theme";
+import Login from "./Login/Login";
+import SignUp from "./Login/SignUp";
 import { showFlights } from "../api/flights";
 import { showAirlines } from "../api/airlines";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const App = () => {
-  console.log("Hi");
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    showFlights()
-      .then((response) => {
-        setMessage(response.message);
-      })
-      .catch((error) => {
-        setMessage(error.message);
-      });
-  });
-
-  useEffect(() => {
-    showAirlines()
-      .then((response) => {
-        setMessage(response.message);
-      })
-      .catch((error) => {
-        setMessage(error.message);
-      });
-  });
   return (
-    <div className="App">
-      <h1>Hello, World!</h1>
-      <h2>{message}</h2>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={() => <div>home</div>} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 
