@@ -4,6 +4,7 @@ import { showFlights } from "../api/flights";
 import { showAirlines } from "../api/airlines";
 
 const App = () => {
+  console.log("Hi");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
